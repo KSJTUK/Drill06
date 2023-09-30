@@ -16,16 +16,40 @@ def handle_events():
             running = False
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
+    # if mouse click: call create_hand_click_point
+
+def create_hand_click_point(point):
+    hand_point_list.append([*point])
+
+def character_move_to_hand(hand_point):
+    # move character
+    # if meet hand:
+    # list[0] delete and move to new list[0]
+    pass
+
+def draw_all_hand():
+    pass
 
 
 running = True
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
 
+# store clicked point in list
+hand_point_list = [[]]
+
 while running:
     clear_canvas()
+
+    # character move
+    character_move_to_hand()
+
     TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
     character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+
+    # created hands draw
+    draw_all_hand()
+
     update_canvas()
     frame = (frame + 1) % 8
 
