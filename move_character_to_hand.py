@@ -6,6 +6,7 @@ open_canvas(TUK_WIDTH, TUK_HEIGHT)
 
 TUK_ground = load_image('TUK_GROUND.png')
 character = load_image('animation_sheet.png')
+hand = load_image('hand_arrow.png')
 
 def handle_events():
     global running 
@@ -14,12 +15,15 @@ def handle_events():
     for event in events:
         if event.type == SDL_QUIT:
             running = False
+        elif event.type == SDL_MOUSEBUTTONDOWN:
+            create_hand_click_point((event.x, TUK_HEIGHT -  1 - event.y))
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
     # if mouse click: call create_hand_click_point
 
 def create_hand_click_point(point):
     hand_point_list.append([*point])
+    print(hand_point_list)
 
 def character_move_to_hand(hand_point):
     # move character
@@ -42,7 +46,7 @@ while running:
     clear_canvas()
 
     # character move
-    character_move_to_hand()
+    # character_move_to_hand()
 
     TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
     character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
