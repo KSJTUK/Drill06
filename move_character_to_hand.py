@@ -32,7 +32,9 @@ def character_move_to_hand(hand_point):
     pass
 
 def draw_all_hand():
-    pass
+    global hand, hand_point_list
+    for point in hand_point_list[1::]:
+        hand.draw(*point)
 
 
 running = True
