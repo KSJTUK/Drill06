@@ -25,13 +25,18 @@ def create_hand_click_point(point):
     hand_point_list.append([*point])
     print(hand_point_list)
 
-def character_move_to_hand(hand_point_list):
+def character_move_to_hand():
+    global hand_point_list
+
     if len(hand_point_list) > 0:
         hand_point = hand_point_list[0]
         global x, y, speed, flip
         move_speed = speed / 100
+
         x = (1 - move_speed) * x + move_speed * hand_point[0]
         y = (1 - move_speed) * y + move_speed * hand_point[1]
+        if round(x) == hand_point[0] and round(y) == hand_point[1]:
+            del hand_point_list[0]
 
 def draw_all_hand():
     global hand, hand_point_list
@@ -51,13 +56,15 @@ while running:
     clear_canvas()
 
     # character move
-    character_move_to_hand(hand_point_list)
+    character_move_to_hand()
+
 
     TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+
 
     # created hands draw
     draw_all_hand()
+    character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
 
     update_canvas()
     frame = (frame + 1) % 8
