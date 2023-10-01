@@ -1,7 +1,6 @@
 from pico2d import *
 
-# test size 800, 600
-TUK_WIDTH, TUK_HEIGHT = 800, 600
+TUK_WIDTH, TUK_HEIGHT = 1280, 1024
 open_canvas(TUK_WIDTH, TUK_HEIGHT)
 
 TUK_ground = load_image('TUK_GROUND.png')
@@ -23,7 +22,6 @@ def handle_events():
 
 def create_hand_click_point(point):
     hand_point_list.append([*point])
-    print(hand_point_list)
 
 def character_move_to_hand():
     global hand_point_list
@@ -70,5 +68,7 @@ while running:
     frame = (frame + 1) % 8
 
     handle_events()
+
+    delay(0.001)
 
 close_canvas()
